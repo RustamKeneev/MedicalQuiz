@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for quiz in quiz_list %}
+        {{ quiz.name }}
+    {% endfor %}
+
+    {% for category in quiz_category_list %}
+        <ul>
+            <li>
+                <input type="checkbox">
+                <span>
+                    {{ category.name }}
+                </span>
+            </li>
+        </ul>
+    {% endfor %}
+</body>
+</html>
