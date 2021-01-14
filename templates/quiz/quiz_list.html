@@ -7,12 +7,20 @@
 <body>
     {% for quiz in quiz_list %}
         {{ quiz.name }}
+
         {% for category in quiz.categories.all %}
+            <ul>
     {{ category.name }}
             {% for option in category.options.all %}
-            {{ option.name }}
-            {{ option.description }}
+                <li style="display: inherit">
+                    <input type="checkbox">
+                        <span>
+                            {{ option.name }}
+{#            {{ option.description }}#}
+                        </span>
+                </li>
         {% endfor %}
+            </ul>
         {% endfor %}
     {% endfor %}
 
