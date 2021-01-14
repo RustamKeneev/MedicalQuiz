@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import View
-from .models import Quiz,Category
+from .models import Quiz,Category,Option
 
 class QuizView(View):
     """Список опросников"""
@@ -8,8 +8,14 @@ class QuizView(View):
         quiz = Quiz.objects.all()
         return render(request,"quiz/quiz_list.html",{"quiz_list":quiz})
 
-class CategoryView(View):
-    """Список категорий"""
-    def get(self,request):
-        category = Category.objects.all()
-        return render(request,"quiz/quiz_list.html",{"quiz_category_list":category})
+# class CategoryView(View):
+#     """Список категорий"""
+#     def get(self,request):
+#         category = Category.objects.all()
+#         return render(request,"quiz/quiz_list.html",{"quiz_category_list":category})
+#
+# class OptionView(View):
+#     """Список чексбоксов"""
+#     def get(self,request):
+#         options = Option.objects.all()
+#         return render(request,"quiz/quiz_list.html",{"quiz_option_list":options})
