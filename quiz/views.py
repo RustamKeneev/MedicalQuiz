@@ -8,6 +8,12 @@ class QuizView(View):
         quiz = Quiz.objects.all()
         return render(request,"quiz/quiz_list.html",{"quiz_list":quiz})
 
+
+def checklist(request,id):
+    if request.method == "POST":
+        pass
+
+
 # class CategoryView(View):
 #     """Список категорий"""
 #     def get(self,request):

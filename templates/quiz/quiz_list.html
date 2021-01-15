@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
     {% for quiz in quiz_list %}
         {{ quiz.name }}
 
@@ -13,7 +14,7 @@
     {{ category.name }}
             {% for option in category.options.all %}
                 <li style="display: inherit">
-                    <input type="checkbox">
+                    <input type="checkbox" name="checkboxlist" value="example">
                         <span>
                             {{ option.name }}
 {#            {{ option.description }}#}
@@ -23,24 +24,8 @@
             </ul>
         {% endfor %}
     {% endfor %}
-
-{#    {% for category in quiz_category_list %}#}
-{#        <ul>#}
-{#            <li>#}
-{#                {{ category.name }}#}
-{#                <ul>#}
-{#                    <li>#}
-{#                        <input type="checkbox">#}
-{#                        <span>#}
-{#                            {% for category_description in quiz_category_list %}#}
-{#                                {{ category_description.name }}#}
-{#                            {% endfor %}#}
-{#                        </span>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </li>#}
-{#        </ul>#}
-
-{#    {% endfor %}#}
+    <button type="submit">
+        Выдать результат
+    </button>
 </body>
 </html>
