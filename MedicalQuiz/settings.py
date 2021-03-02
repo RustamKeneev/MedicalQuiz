@@ -25,7 +25,7 @@ SECRET_KEY = 'flshl=wp%rdt%)+7(@0s(fgo=xh+u_o%#%_a24wisa*#yy42(n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
