@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views.generic.base import View
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.schemas.openapi import SchemaGenerator
+from rest_framework.views import APIView
+from rest_framework_swagger import renderers
 
 from .models import Quiz,Category,Option
-from .serializers import QuizSerializer
+from .serializers import QuizSerializer, QuestionListSerializer
 
 
 class QuizView(View):
@@ -33,4 +36,18 @@ def get_options(request,id):
         return Response(data={'result': 'сообщение не существует'}, status=status.HTTP_404_NOT_FOUND)
     data = QuizSerializer(posts).data
     return Response(data=data, status=status.HTTP_200_OK)
+
+
+class QuestionListView(generics.ListCreateAPIView):
+    """Список вопросов"""
+    serializer_class = QuestionListSerializer
+    queryset = Option.objects.all()
+    lookup_field = 'id'
+
+
+    # def get(self,request,*args,**kwargs):
+    #     question = Option.objects.get(id=kwargs['question_id'])
+    #     return render(request,context={
+    #         'question':question
+    #     })
 

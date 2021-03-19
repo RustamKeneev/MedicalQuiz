@@ -22,5 +22,10 @@ class QuizSerializer(serializers.ModelSerializer):
         options = Quiz.objects.filter(quiz=obj)
         return OptionSerializer(options,many=True).data
 
+class QuestionListSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    class Meta:
+        model = Option
+        fields = ['id', 'name', 'description','category']
 
 
