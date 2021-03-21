@@ -29,3 +29,5 @@ class QuestionListSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description','category']
 
 
+
+

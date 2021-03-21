@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework_swagger import renderers
 
 from .models import Quiz,Category,Option
-from .serializers import QuizSerializer, QuestionListSerializer
+from .serializers import QuizSerializer, QuestionListSerializer,OptionSerializer
 
 
 class QuizView(View):
@@ -43,6 +43,15 @@ class QuestionListView(generics.ListCreateAPIView):
     serializer_class = QuestionListSerializer
     queryset = Option.objects.all()
     lookup_field = 'id'
+
+
+class QuestionDetailView(APIView):
+    allow_methods = ['GET', 'DELETE', 'PUT']
+    serializer_class = OptionSerializer
+
+    def get(self,request,id):
+        question = Option.objects.get(id=id)
+        return Response(data=self.serializer_class(question).data)
 
 
     # def get(self,request,*args,**kwargs):
