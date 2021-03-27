@@ -3,12 +3,11 @@ from django.views.generic.base import View
 from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.schemas.openapi import SchemaGenerator
 from rest_framework.views import APIView
-from rest_framework_swagger import renderers
+from rest_framework import viewsets
 
-from .models import Quiz,Category,Option
-from .serializers import QuizSerializer, QuestionListSerializer,OptionSerializer
+from .models import Quiz,Category,Option,OptionList
+from .serializers import QuizSerializer, QuestionListSerializer,OptionSerializer,OptionMTMSerializer
 
 
 class QuizView(View):
@@ -44,7 +43,6 @@ class QuestionListView(generics.ListCreateAPIView):
     queryset = Option.objects.all()
     lookup_field = 'id'
 
-
 class QuestionDetailView(APIView):
     allow_methods = ['GET', 'DELETE', 'PUT']
     serializer_class = OptionSerializer
@@ -54,9 +52,18 @@ class QuestionDetailView(APIView):
         return Response(data=self.serializer_class(question).data)
 
 
-    # def get(self,request,*args,**kwargs):
-    #     question = Option.objects.get(id=kwargs['question_id'])
-    #     return render(request,context={
-    #         'question':question
-    #     })
+class OptionViewSet(viewsets.ModelViewSet):
+    serializer_class = OptionSerializer
+    def get_queryset(self):
+        options = Option.objects.all()
+        return options
+
+class OptionListViewSet(viewsets.ModelViewSet):
+    serializer_class = OptionMTMSerializer
+    def get_queryset(self):
+        option_list = OptionList.objects.all()
+        return option_list
+
+
+
 

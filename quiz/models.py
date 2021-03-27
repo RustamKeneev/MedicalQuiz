@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Quiz(models.Model):
     """Название опросника"""
     name = models.CharField(max_length=256)
@@ -31,7 +30,7 @@ class Option(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='options')
     name = models.CharField(max_length=256)
     description = models.TextField(null=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -40,4 +39,13 @@ class Option(models.Model):
         verbose_name_plural = "Субкатегории"
 
 
+class OptionList(models.Model):
+    options = models.ManyToManyField(Option)
+    options_post_answers = models.TextField(null=True)
 
+    def __str__(self):
+        return self.options_post_answers
+
+    class Meta:
+        verbose_name = "Детальный ответ"
+        verbose_name_plural = "Детальные ответы"

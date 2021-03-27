@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from quiz.models import Quiz,Category,Option
+from quiz.models import Quiz,Category,Option, OptionList
 
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,5 +29,10 @@ class QuestionListSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description','category']
 
 
+
+class OptionMTMSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OptionList
+        fields = ['id','options_post_answers']
 
 
