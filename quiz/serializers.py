@@ -31,8 +31,9 @@ class QuestionListSerializer(serializers.ModelSerializer):
 
 
 class OptionMTMSerializer(serializers.ModelSerializer):
+    options = OptionSerializer(many=True)
     class Meta:
         model = OptionList
-        fields = ['id','options_post_answers']
+        fields = ['id','options_post_answers', "options"]
 
 

@@ -22,7 +22,7 @@ from .yasg import urlpatterns as doc_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("quiz.urls")),
-    path("options/",include("quiz.urls")),
+    # path("options/",include("quiz.urls")),
 ]
 
 urlpatterns += doc_urls

@@ -1,9 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic.base import View
 from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework import viewsets
 
 from .models import Quiz,Category,Option,OptionList
@@ -16,10 +16,10 @@ class QuizView(View):
         quiz = Quiz.objects.all()
         return render(request,"quiz/quiz_list.html",{"quiz_list":quiz})
 
-
-def checklist(request,id):
-    if request.method == "POST":
-        pass
+#
+# def checklist(request,id):
+#     if request.method == "POST":
+#         pass
 
 @api_view(['GET'])
 def get_all_quizs(request):
@@ -39,21 +39,14 @@ def get_options(request,id):
 
 class QuestionListView(generics.ListCreateAPIView):
     """Список вопросов"""
-    serializer_class = QuestionListSerializer
+    serializer_class = OptionSerializer
     queryset = Option.objects.all()
     lookup_field = 'id'
-
-# class QuestionDetailView(APIView):
-#     allow_methods = ['GET', 'DELETE', 'PUT']
-#     serializer_class = OptionSerializer
-#
-#     def get(self,request,id):
-#         question = Option.objects.get(id=id)
-#         return Response(data=self.serializer_class(question).data)
 
 
 class OptionViewSet(viewsets.ModelViewSet):
     serializer_class = OptionSerializer
+
     def get_queryset(self):
         options = Option.objects.all()
         return options
