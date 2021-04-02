@@ -53,10 +53,18 @@ class OptionViewSet(viewsets.ModelViewSet):
 
 class OptionListViewSet(viewsets.ModelViewSet):
     serializer_class = OptionMTMSerializer
+    queryset = OptionList.objects.all()
     def get_queryset(self):
-        option_list = OptionList.objects.all()
+        id = self.request.data["id"]
+        option_list = OptionList.objects.filter(options__in=[id])
         return option_list
 
 
+class OptionAPIView(generics.GenericAPIView):
+    serializer_class = OptionMTMSerializer
 
-
+    def post(self, request, *args, **kwargs):
+        ids = request.data["ids"]
+        qs = OptionList.objects.filter(options__id__in=ids)
+        print(qs)
+        # return Response(serializer.data)

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'quiz',
+    'django_filters',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [

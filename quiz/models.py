@@ -40,7 +40,7 @@ class Option(models.Model):
 
 
 class OptionList(models.Model):
-    options = models.ManyToManyField(Option)
+    options = models.ManyToManyField(Option,related_name="answers",blank=True)
     options_post_answers = models.TextField(null=True)
 
     def __str__(self):
@@ -49,3 +49,5 @@ class OptionList(models.Model):
     class Meta:
         verbose_name = "Детальный ответ"
         verbose_name_plural = "Детальные ответы"
+
+
