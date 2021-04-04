@@ -64,7 +64,14 @@ class OptionAPIView(generics.GenericAPIView):
     serializer_class = OptionMTMSerializer
 
     def post(self, request, *args, **kwargs):
-        ids = request.data["ids"]
-        qs = OptionList.objects.filter(options__id__in=ids)
-        print(qs)
-        # return Response(serializer.data)
+        option_ids = request.data.get('ids')
+        general_qs_list = list()
+        for option_id in option_ids:
+            option_qs = OptionList.objects.filter(options__id=option_id)
+            if not option_qs:
+                general_qs_list.clear()
+                print(option_qs)
+                break
+            general_qs_list += option_qs
+        serializer = self.serializer_class(set(general_qs_list), many=True)
+        return Response(serializer.data)
