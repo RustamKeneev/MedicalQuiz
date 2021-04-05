@@ -32,7 +32,7 @@ class Option(models.Model):
     description = models.TextField(null=True)
 
     def __str__(self):
-        return self.name
+        return f'#{self.id} {self.name}'
 
     class Meta:
         verbose_name = "Субкатегория"
