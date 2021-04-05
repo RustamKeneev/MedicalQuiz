@@ -66,7 +66,11 @@ class OptionAPIView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         option_ids = request.data.get('ids')
-        optionlists = OptionList.objects.annotate(Count('options')).filter(options__count=len(option_ids))
+        optionlists = (
+            OptionList.objects
+            .annotate(options__count=Count('options'))
+            .filter(options__count=len(option_ids))
+        )
         for option_id in option_ids:
             optionlists = optionlists.filter(options__id=option_id)
         serializer = self.serializer_class(optionlists, many=True)
